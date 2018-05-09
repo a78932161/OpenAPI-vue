@@ -3,7 +3,7 @@
     <el-row>
         <el-col :span="1">
             <div class="contract-btn" @click="changeLeftNav">
-              
+
                 <!-- <b>
                     <i class="iconfont icon-all"></i></b>
                 <b> -->
@@ -32,7 +32,7 @@
             </el-tab-pane>
             </el-tabs> -->
             <!-- <span v-for="tag in tags" @click="clickTab(tag.name)">
-            <el-tag 
+            <el-tag
             :key="tag.name"
             :closable = "isIndex(tag.name)"
             :type="tag.type"
@@ -41,24 +41,10 @@
             {{tag.name}}
             </el-tag>
             </span> -->
-            <el-button type="success" round>登录/注册</el-button>
+            <el-button type="success" round @click="goIndex">退出项目</el-button>
         </el-col>
     </el-row>
-    <el-row>
-      <el-col :span="24" class="tabsLine">
-      <span v-for="tag in tags" @click="clickTab(tag.name)">
-            <el-tag 
-            :key="tag.name"
-            :closable = "isIndex(tag.name)"
-            :type="tag.type"
-            @close="handleClose(tag)"
-            >
-            {{tag.name}}
-            </el-tag>
-            </span>
-      </el-col>
-    </el-row>
-    
+
     </div>
 </template>
 
@@ -74,33 +60,18 @@ export default {
       handleClose(tag) {
         this.tags.splice(this.tags.indexOf(tag), 1);
       },
-      clickTab(name){
-          let tagArry = this.$store.state.tagsURL;
-        //把当前点击的标签改为绿色其他标签颜色全改为灰色
-        let path = '';
-        for(let i = 0 ; i<tagArry.length ; i++){
-          if(name == tagArry[i].name){
-            path = tagArry[i].path;
-            tagArry[i].type = '';
-          }else {
-            tagArry[i].type = 'info';
-          }
-        }
-        this.$router.push(path)
-      },
-      //判断是否是首页，首页不可关闭
-      isIndex(name){
-        if(name == '首页'){
-          return false;
-        }
-        return true;
-      },
       changeLeftNav () {
           this.iconName = this.$store.state.leftNavStatus ? 'el-icon-d-arrow-left':'el-icon-d-arrow-right'
            this.$store.commit('changeLeftNav')
-        }
+        },
+      goIndex(){
+        this.$router.push('/');
+        this.$router.go(0);
+
+      }
     },
     computed : {
+
     }
 }
 </script>

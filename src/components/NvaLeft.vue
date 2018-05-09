@@ -1,24 +1,23 @@
 <template>
 <div class="leftBar" :style = "{width : changeLeftNavStyle,height: this.$store.state.windowHeight+'px'}" >
-    <el-menu default-active="-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="changeLeftNav"  text-color="#fff"
-      active-text-color="#409EFF" background-color="#324157">
+    <el-menu default-active="-1" class="el-menu-vertical-demo"
+      @open="handleOpen" @close="handleClose" :collapse="changeLeftNav"  text-color="#fff"
+             active-text-color="#409EFF" background-color="#324157">
       <el-menu-item index="-1" @click="toIndex">
         <i class="el-icon-menu"></i>
         <span slot="title" >项目简介</span>
       </el-menu-item>
-    <el-submenu :index="index" v-for="(item, index) in getAPI">
+    <el-submenu index="index" v-for="(item, index) in getAPI" :key="item.name">
         <template slot="title">
-        <el-badge :value="item.paths.length" class="item" :max='99'></el-badge>
+          <span class="el-icon-star-off"></span>
         <span slot="title" >{{item.name}}</span>
         </template>
         <span v-for="(item2, index2) in item.paths" @click="goApi(index,index2,item2.summary)">
-        <el-menu-item :index="index +'-'+ index2">{{item2.summary}}</el-menu-item>
+        <el-menu-item  :index="index +'-'+ index2">{{item2.summary}}
+          {{item2.type}}
+        </el-menu-item>
         </span>
-        <!-- </el-menu-item-group>
-        <el-submenu index="1-4">
-        <span slot="title">选项4</span>
-        <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu> -->
+
     </el-submenu>
     </el-menu>
 </div>
@@ -37,49 +36,38 @@ export default {
     },
     methods: {
       handleOpen(key, keyPath) {
-        console.log(key, keyPath);
+        //console.log(key, keyPath);
       },
       handleClose(key, keyPath) {
-        console.log(key, keyPath);
+        //console.log(key, keyPath);
       },
       goApi(index,index2,summary){
-        let tagArry = this.$store.state.tagsURL;
-        let flg = true;
-        //把其他标签颜色全改为灰色,当前标签绿色
-        for(let i = 0 ; i<tagArry.length ; i++){
-          if(summary == tagArry[i].name){
-            tagArry[i].type = '';
-            flg = false;
-          }else {
-            tagArry[i].type = 'info';
-          }
-        }
-        if(flg){
-          //添加标签
-        this.$store.commit('addTabs',{ name: summary, type: '' ,path:'/api/'+index+'/'+index2});
-        }
         //跳转路由
-        this.$router.push('/api/'+index+'/'+index2)
+        this.$router.push('/Layout/api/'+index+'/'+index2)
       },
       toIndex(){
-        let _this = this;
-        for(let i = 0 ; i<this.$store.state.tagsURL.length ; i++){
-          _this.$store.state.tagsURL[i].type='info'
-        }
-        this.$store.state.tagsURL[0].type=''
-        this.$router.push('/');
+        this.$router.push('/Layout');
+        // this.$router.go(0);
       }
     },
     computed : {
         changeLeftNav () {
-          this.changeLeftNavStyle = this.$store.state.leftNavStatus ? null : '250px'
+          this.changeLeftNavStyle = this.$store.state.leftNavStatus ? null : '250px';
           return this.$store.state.leftNavStatus
-        },
+        },//改导航栏
         getAPI(){
-            console.log(this.$store.getters.getMenuTreeObj)
-            return  this.$store.getters.getMenuTreeObj;
-        }
+          if (this.$store.state.contrast) {
+            return this.$store.getters.getMenuTreeObj1;
+          }else{
+            return this.$store.getters.getMenuTreeObj;
+          }
+        }//获取数据
+
+    },
+    mounted(){
+      console.log(this.getAPI);
     }
+
   }
 </script>
 
@@ -96,7 +84,7 @@ export default {
   .el-menu-vertical-demo {
       border: 0
   }
-  a {text-decoration:none} 
+  a {text-decoration:none}
 
 </style>
 

@@ -1,6 +1,5 @@
 <template>
   <div class = "apiindex-class">
-    
     <el-row>
       <el-col :span="24" >
         <el-tabs :tab-position="tabPosition" v-model="activeName" :style="{height: this.$store.state.windowHeight+'px'}">
@@ -13,7 +12,7 @@
         </el-tabs>
       </el-col>
     </el-row>
-        
+
   </div>
 </template>
 <script>
@@ -27,7 +26,7 @@ export default {
   },
   components: {
     ApiTest,ApiDetails
-  }
+  },
   // mounted() {
   //     let tagsURL = this.$store.state.tagsURL;
   //     let url = '/api/'+this.$route.params.start+'/'+this.$route.params.end;

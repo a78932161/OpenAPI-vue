@@ -26,6 +26,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      'common': resolve('src/common'),
       'jquery': 'jquery',
       'JSONView': path.resolve(__dirname,'../node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.js'),
       'JSONViewCss': path.resolve(__dirname,'../node_modules/jquery.json-viewer/json-viewer/jquery.json-viewer.css')

@@ -1,8 +1,8 @@
 {
-  "name": "vue-swagger-ui",
+  "name": "OpenAPI-vue",
   "version": "1.0.0",
-  "description": "VUE重写的Swagger-ui，使其更方便，更美观",
-  "author": "lyq <99190092@qq.com>",
+  "description": "VUE重写的Swagger-ui",
+  "author": "LHZ <506394403@qq.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -17,6 +17,7 @@
     "element-ui": "^2.0.5",
     "jquery": "^2.2.3",
     "jquery.json-viewer": "^1.1.0",
+    "qs": "^6.5.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

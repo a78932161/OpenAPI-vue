@@ -50,7 +50,7 @@
 export default {
     data() {
       return {
-       
+
       }
     }
 }
@@ -76,8 +76,9 @@ export default {
   margin-top: 10px
 }
 .btn-class button{
-  margin : 0px 0px 10px 30px;
+  margin : 0 0 10px 30px;
   width: 100px;
 }
+
 </style>
 
